@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSearchAndReplace", "JSearchAndReplace\JSearchAndReplace.csproj", "{64337A61-751E-4C0C-B4C7-7A1345C306C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JSearchAndReplaceUnitTest", "JSearchAndReplaceUnitTest\JSearchAndReplaceUnitTest.csproj", "{AFF2B874-FAB0-46C0-BE29-D7C7BD833663}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{64337A61-751E-4C0C-B4C7-7A1345C306C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64337A61-751E-4C0C-B4C7-7A1345C306C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64337A61-751E-4C0C-B4C7-7A1345C306C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64337A61-751E-4C0C-B4C7-7A1345C306C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFF2B874-FAB0-46C0-BE29-D7C7BD833663}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFF2B874-FAB0-46C0-BE29-D7C7BD833663}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFF2B874-FAB0-46C0-BE29-D7C7BD833663}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFF2B874-FAB0-46C0-BE29-D7C7BD833663}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
