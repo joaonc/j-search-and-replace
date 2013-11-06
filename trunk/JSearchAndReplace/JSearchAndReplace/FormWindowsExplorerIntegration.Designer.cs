@@ -53,6 +53,8 @@
             // checkBoxEnableRightClick
             // 
             this.checkBoxEnableRightClick.AutoSize = true;
+            this.checkBoxEnableRightClick.Checked = true;
+            this.checkBoxEnableRightClick.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxEnableRightClick.Location = new System.Drawing.Point(12, 12);
             this.checkBoxEnableRightClick.Name = "checkBoxEnableRightClick";
             this.checkBoxEnableRightClick.Size = new System.Drawing.Size(113, 17);
