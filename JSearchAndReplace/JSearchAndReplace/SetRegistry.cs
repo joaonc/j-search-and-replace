@@ -79,14 +79,19 @@ namespace JSearchAndReplace
                     RegistryKey regKey = Registry.ClassesRoot.OpenSubKey(extension, true);
                     if (regKey == null)
                     {
-                        // Create new entry
+                        // Create new entry for the extension under HKEY_CLASSES_ROOT
                         regKey = Registry.ClassesRoot.CreateSubKey(extension);
                         regKey.SetValue("", extension.TrimStart('.') + "file", RegistryValueKind.String);  // Default value
+                        regKey.SetValue("Content Type", "text/plain", RegistryValueKind.String);
+                        regKey.SetValue("PerceivedType", "text", RegistryValueKind.String);
+                        regKey.Close();
                     }
+
+                    Registry.ClassesRoot.GetValue("");
                 }
-                catch (UnauthorizedAccessException)
+                catch (UnauthorizedAccessException ex)
                 {
-                    MessageBox.Show("Not enough permissions to update the registry.");
+                    MessageBox.Show(ex.Message, "Not enough permissions to update the registry");
                 }
             }
         }

@@ -91,17 +91,44 @@ namespace JSearchAndReplace
                     case "output":
                         OutputFile = parameter;
                         break;
-                    case "s":
-                    case "search":
+                    case "f":
+                    case "searchandreplacefile":
                         SearchAndReplaceFile = parameter;
                         break;
-                    case "d":
-                    case "dictionary":
+                    case "e":
+                    case "existingset":
+                        SearchAndReplaceContent = SearchAndReplaceUtil.GetExistingSet(parameter);
+                        break;
+                    case "c":
+                    case "custom":
+                        SearchAndReplaceContent = SearchAndReplaceUtil.GetSetFromCSV(parameter);
                         break;
                     default:
                         throw new Exception("Unknown parameter: " + parameter);
                 }
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="verbose">Whether to return the long version of the parameters (ex: input) or the short version (ex: i).</param>
+        /// <param name="includeInputFile">Whether to include the input file. If false it will also NOT include the parsed output file.</param>
+        /// <returns></returns>
+        public string GetCommandLineParameters(bool verbose, bool includeInputFile)
+        {
+            StringBuilder sbParams = new StringBuilder();
+
+            if (includeInputFile && !string.IsNullOrEmpty(InputFile))
+                sbParams.Append(string.Format("{0} {1} ", verbose ? "input" : "i", InputFile));
+
+            if (!string.IsNullOrEmpty(OutputFile))
+                sbParams.Append(string.Format("{0} {1} ", verbose ? "output" : "o", OutputFile));
+
+            if (!string.IsNullOrEmpty(SearchAndReplaceFile))
+                sbParams.Append(string.Format("{0} {1} ", verbose ? "searchandreplacefile" : "f", SearchAndReplaceFile));
+
+            return sbParams.ToString();
         }
 
         private void ParseOutputFile()

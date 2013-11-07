@@ -14,7 +14,16 @@ namespace JSearchAndReplace
         [STAThread]
         static void Main(string[] args)
         {
-            bool registryProcessed = SetRegistry.CheckCommandLineArgs(args);  // If specified in the args, updates the registry
+            bool registryProcessed = false;
+            try
+            {
+                registryProcessed = SetRegistry.CheckCommandLineArgs(args);  // If specified in the args, updates the registry
+            }
+            catch (Exception ex)
+            {
+                registryProcessed = true;
+                MessageBox.Show(ex.Message, "Error updating the registry", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
             if (!registryProcessed)
             {
