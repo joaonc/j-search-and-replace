@@ -52,6 +52,13 @@
   <ItemGroup>
     <Compile Include="ParseInputUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchAndReplaceUtilUnitTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JSearchAndReplace\JSearchAndReplace.csproj">
+      <Project>{64337a61-751e-4c0c-b4c7-7a1345c306c0}</Project>
+      <Name>JSearchAndReplace</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
