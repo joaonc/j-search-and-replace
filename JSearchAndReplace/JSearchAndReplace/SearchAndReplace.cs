@@ -7,12 +7,6 @@ using System.Threading.Tasks;
 
 namespace JSearchAndReplace
 {
-    public enum SearchAndReplaceMethod
-    {
-        LineByLine,
-        WholeFileInMemory
-    }
-
     public static class SearchAndReplace
     {
         public static void SearchAndReplaceInFile(SearchAndReplaceParameters searchAndReplaceParameters)
