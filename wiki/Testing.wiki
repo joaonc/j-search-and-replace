@@ -8,6 +8,20 @@ Normally this isn't required, but there's a section of the code that runs under 
 
 = Regular testing =
 
+Just open the solution and either run the app in Debug mode.
+There are also Unit Tests you can run to make sure everything is ok. At the time of this writing, there are no unit tests for the part of the code that runs under UAC.
+
+= Testing under UAC =
+
+UAC (User Account Control) is a feature introduced in Windows Vista to prevent applications from tinkering with the OS where it can have devastating effects.
+
+In this app, there's a piece of the code that updates the registry under `HKEY_CLASSES_ROOT`, where the user can register for a right click option to Search and Replace a file.
+This part of the code is all in the `SetRegistry` class.
+
+Debugging under UAC is a bit more tricky and here are the steps:
+
+
+
 Add your content here.  Format your content with:
   * Text in *bold* or _italic_
   * Headings, paragraphs, and lists
