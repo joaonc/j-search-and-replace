@@ -43,7 +43,7 @@
             // 
             this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonClose.Location = new System.Drawing.Point(289, 286);
+            this.buttonClose.Location = new System.Drawing.Point(422, 398);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(75, 23);
             this.buttonClose.TabIndex = 0;
@@ -106,7 +106,7 @@
             this.groupBoxFiles.Controls.Add(this.radioButtonAllFiles);
             this.groupBoxFiles.Location = new System.Drawing.Point(12, 35);
             this.groupBoxFiles.Name = "groupBoxFiles";
-            this.groupBoxFiles.Size = new System.Drawing.Size(352, 103);
+            this.groupBoxFiles.Size = new System.Drawing.Size(485, 103);
             this.groupBoxFiles.TabIndex = 6;
             this.groupBoxFiles.TabStop = false;
             this.groupBoxFiles.Text = "File Extensions";
@@ -114,7 +114,7 @@
             // buttonOk
             // 
             this.buttonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOk.Location = new System.Drawing.Point(208, 286);
+            this.buttonOk.Location = new System.Drawing.Point(341, 398);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 23);
             this.buttonOk.TabIndex = 7;
@@ -124,9 +124,11 @@
             // 
             // groupBoxSearchAndReplace
             // 
+            this.groupBoxSearchAndReplace.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxSearchAndReplace.Location = new System.Drawing.Point(13, 145);
             this.groupBoxSearchAndReplace.Name = "groupBoxSearchAndReplace";
-            this.groupBoxSearchAndReplace.Size = new System.Drawing.Size(351, 100);
+            this.groupBoxSearchAndReplace.Size = new System.Drawing.Size(484, 100);
             this.groupBoxSearchAndReplace.TabIndex = 8;
             this.groupBoxSearchAndReplace.TabStop = false;
             this.groupBoxSearchAndReplace.Text = "Search and Replace";
@@ -137,7 +139,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonClose;
-            this.ClientSize = new System.Drawing.Size(376, 321);
+            this.ClientSize = new System.Drawing.Size(509, 433);
             this.Controls.Add(this.groupBoxSearchAndReplace);
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.checkBoxEnableRightClick);

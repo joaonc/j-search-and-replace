@@ -47,29 +47,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormJSearchAndReplace.cs">
+    <Compile Include="UI\FormJSearchAndReplace.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormJSearchAndReplace.Designer.cs">
+    <Compile Include="UI\FormJSearchAndReplace.Designer.cs">
       <DependentUpon>FormJSearchAndReplace.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormWindowsExplorerIntegration.cs">
+    <Compile Include="UI\FormWindowsExplorerIntegration.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormWindowsExplorerIntegration.Designer.cs">
+    <Compile Include="UI\FormWindowsExplorerIntegration.Designer.cs">
       <DependentUpon>FormWindowsExplorerIntegration.cs</DependentUpon>
     </Compile>
     <Compile Include="SearchAndReplaceContent.cs" />
+    <Compile Include="SearchAndReplaceMethod.cs" />
     <Compile Include="SearchAndReplaceParameters.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchAndReplace.cs" />
     <Compile Include="SearchAndReplaceUtil.cs" />
     <Compile Include="SetRegistry.cs" />
-    <EmbeddedResource Include="FormJSearchAndReplace.resx">
+    <Compile Include="UI\UserControlSearchAndReplaceOptions.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UserControlSearchAndReplaceOptions.Designer.cs">
+      <DependentUpon>UserControlSearchAndReplaceOptions.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="UI\FormJSearchAndReplace.resx">
       <DependentUpon>FormJSearchAndReplace.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormWindowsExplorerIntegration.resx">
+    <EmbeddedResource Include="UI\FormWindowsExplorerIntegration.resx">
       <DependentUpon>FormWindowsExplorerIntegration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -81,6 +88,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UI\UserControlSearchAndReplaceOptions.resx">
+      <DependentUpon>UserControlSearchAndReplaceOptions.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.manifest">
       <SubType>Designer</SubType>
     </None>
