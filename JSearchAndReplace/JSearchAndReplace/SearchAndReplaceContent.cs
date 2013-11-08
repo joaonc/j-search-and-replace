@@ -8,6 +8,8 @@ namespace JSearchAndReplace
 {
     public static class SearchAndReplaceContent
     {
+        // NOTE: Make sure you update SearchAndReplaceUtil.ExistingSets to match the entries here
+
         /// <summary>
         /// <para>Search items: all except last</para>
         /// <para>Replace with: last item</para>

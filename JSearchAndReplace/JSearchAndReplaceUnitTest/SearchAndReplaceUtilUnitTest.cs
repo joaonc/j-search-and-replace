@@ -98,14 +98,14 @@ namespace JSearchAndReplaceUnitTest
         [TestMethod]
         public void GetExistingSet_RemoveDiacritics_CamelCase()
         {
-            string[][] set = SearchAndReplaceUtil.GetExistingSet("RemoveDiacritics");
+            string[][] set = SearchAndReplaceUtil.GetExistingSetByCommandLineName("RemoveDiacritics");
             Assert.AreSame(SearchAndReplaceContent.RemoveDiacritics, set);
         }
 
         [TestMethod]
         public void GetExistingSet_RemoveDiacritics_Lowercase()
         {
-            string[][] set = SearchAndReplaceUtil.GetExistingSet("removediacritics");
+            string[][] set = SearchAndReplaceUtil.GetExistingSetByCommandLineName("removediacritics");
             Assert.AreSame(SearchAndReplaceContent.RemoveDiacritics, set);
         }
 
@@ -113,7 +113,7 @@ namespace JSearchAndReplaceUnitTest
         [ExpectedException(typeof(Exception), "Expected exception for non existing set.")]
         public void GetExistingSet_NonExisting()
         {
-            string[][] set = SearchAndReplaceUtil.GetExistingSet("RandomNonExistingSet");
+            string[][] set = SearchAndReplaceUtil.GetExistingSetByCommandLineName("RandomNonExistingSet");
         }
 
         [TestMethod]

@@ -97,7 +97,7 @@ namespace JSearchAndReplace
                         break;
                     case "e":
                     case "existingset":
-                        SearchAndReplaceContent = SearchAndReplaceUtil.GetExistingSet(parameter);
+                        SearchAndReplaceContent = SearchAndReplaceUtil.GetExistingSetByCommandLineName(parameter);
                         break;
                     case "c":
                     case "custom":

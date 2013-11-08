@@ -9,7 +9,19 @@ namespace JSearchAndReplace
 {
     public static class SearchAndReplaceUtil
     {
-        public static string[][] GetExistingSet(string setName)
+        /// <summary>
+        /// Existing sets of search and replace.
+        /// 2D array whith the content
+        /// {Command line name , Readable name , description}
+        /// </summary>
+        public static readonly string[,] ExistingSets = new string[,] { { "RemoveDiacritics", "Remove Diacritics", "Removes accents from a string" } };
+
+        /// <summary>
+        /// Gets an existing search and replace set
+        /// </summary>
+        /// <param name="setName">The commandline name of the set.</param>
+        /// <returns></returns>
+        public static string[][] GetExistingSetByCommandLineName(string setName)
         {
             switch (setName.ToLower())
             {
@@ -19,6 +31,21 @@ namespace JSearchAndReplace
                     throw new Exception("Unknown set: " + setName);
             }
         }
+
+        /// <summary>
+        /// Gets an existing search and replace set
+        /// </summary>
+        /// <param name="setReadableName">The readable name of the set.</param>
+        /// <returns></returns>
+        public static string[][] GetExistingSetByReadableName(string setReadableName)
+        {
+            for (int i = 0; i < ExistingSets.GetLength(0); i++)
+                if (ExistingSets[i, 1].ToLower().Equals(setReadableName))
+                    return GetExistingSetByCommandLineName(ExistingSets[i, 0]);
+
+            throw new Exception("Unknown set: " + setReadableName);
+        }
+
 
         public static string[][] GetSetFromCSV(string csv)
         {

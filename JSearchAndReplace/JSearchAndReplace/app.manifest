@@ -17,11 +17,9 @@
             compatibility then delete the requestedExecutionLevel node.
         -->
         <!-- UAC Normal (comment the UAC Administrator entry) -->
-        <!-- 
         <requestedExecutionLevel level="asInvoker" uiAccess="false" />
-        -->
         <!-- UAC Administrator, to set up Registry options (comment the UAC Normal entry) -->
-        <requestedExecutionLevel level="requireAdministrator" uiAccess="false" />
+        <!-- <requestedExecutionLevel level="requireAdministrator" uiAccess="false" /> -->
       </requestedPrivileges>
     </security>
   </trustInfo>
