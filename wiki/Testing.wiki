@@ -1,0 +1,14 @@
+#summary How to QA the solution, especially the part of the code under UAC.
+#labels Featured
+
+= Introduction =
+
+This pages goes over the testing and debugging of the solution.
+Normally this isn't required, but there's a section of the code that runs under UAC and testing that requires a couple of extra steps.
+
+= Regular testing =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
