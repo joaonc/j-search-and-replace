@@ -19,10 +19,6 @@ namespace JSearchAndReplace
 
         private void FormJSearchAndReplace_Load(object sender, EventArgs e)
         {
-            comboBoxSearchAndReplaceSet.Items.Add("Remove Diacritics");
-            comboBoxSearchAndReplaceSet.SelectedIndex = 0;
-
-            UpdateUI();
         }
 
         /// <summary>
@@ -41,19 +37,6 @@ namespace JSearchAndReplace
             return searchAndReplaceParameters;
         }
 
-        private void UpdateUI()
-        {
-            textBoxFileSearchAndReplace.Enabled = radioButtonSearchAndReplaceFile.Checked;
-            comboBoxSearchAndReplaceSet.Enabled = radioButtonSearchAndReplaceSet.Checked;
-        }
-
-        private void buttonGo_Click(object sender, EventArgs e)
-        {
-            SearchAndReplaceParameters searchAndReplaceParamenters = GetSearchAndReplaceParameters();
-
-            SearchAndReplace.SearchAndReplaceInFile(searchAndReplaceParamenters);
-        }
-
         private void textBoxFileIn_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
@@ -66,26 +49,11 @@ namespace JSearchAndReplace
             textBoxFileIn.Text = files[0];
         }
 
-        private void textBoxFileSearchAndReplace_DragEnter(object sender, DragEventArgs e)
+        private void buttonGo_Click(object sender, EventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-                e.Effect = DragDropEffects.Copy;
-        }
+            SearchAndReplaceParameters searchAndReplaceParamenters = GetSearchAndReplaceParameters();
 
-        private void textBoxFileSearchAndReplace_DragDrop(object sender, DragEventArgs e)
-        {
-            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-            textBoxFileSearchAndReplace.Text = files[0];
-        }
-
-        private void radioButtonSearchAndReplaceFile_CheckedChanged(object sender, EventArgs e)
-        {
-            UpdateUI();
-        }
-
-        private void radioButtonSearchAndReplaceSet_CheckedChanged(object sender, EventArgs e)
-        {
-            UpdateUI();
+            SearchAndReplace.SearchAndReplaceInFile(searchAndReplaceParamenters);
         }
 
         private void buttonWindowsExplorerIntegration_Click(object sender, EventArgs e)

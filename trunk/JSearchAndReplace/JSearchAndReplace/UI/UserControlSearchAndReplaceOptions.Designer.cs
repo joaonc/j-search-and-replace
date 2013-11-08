@@ -74,22 +74,24 @@
             // 
             // comboBoxSearchAndReplaceSet
             // 
-            this.comboBoxSearchAndReplaceSet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxSearchAndReplaceSet.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSearchAndReplaceSet.FormattingEnabled = true;
             this.comboBoxSearchAndReplaceSet.Location = new System.Drawing.Point(96, 4);
             this.comboBoxSearchAndReplaceSet.Name = "comboBoxSearchAndReplaceSet";
-            this.comboBoxSearchAndReplaceSet.Size = new System.Drawing.Size(283, 21);
+            this.comboBoxSearchAndReplaceSet.Size = new System.Drawing.Size(201, 21);
             this.comboBoxSearchAndReplaceSet.TabIndex = 3;
             // 
             // textBoxFileName
             // 
+            this.textBoxFileName.AllowDrop = true;
             this.textBoxFileName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxFileName.Location = new System.Drawing.Point(96, 31);
             this.textBoxFileName.Name = "textBoxFileName";
             this.textBoxFileName.Size = new System.Drawing.Size(201, 20);
             this.textBoxFileName.TabIndex = 4;
+            this.textBoxFileName.DragDrop += new System.Windows.Forms.DragEventHandler(this.textBoxFileName_DragDrop);
+            this.textBoxFileName.DragEnter += new System.Windows.Forms.DragEventHandler(this.textBoxFileName_DragEnter);
             // 
             // buttonFileOpen
             // 
