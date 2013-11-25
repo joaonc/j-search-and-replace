@@ -41,6 +41,11 @@ namespace JSearchAndReplace
         /// </summary>
         public string[][] SearchAndReplaceContent { get; set; }
 
+        /// <summary>
+        /// Run the app without UI, useful for command line batch processing.
+        /// </summary>
+        public bool NoUI { get; set; }
+
         public Encoding Encoding { get; set; }
 
         /// <summary>
@@ -63,50 +68,63 @@ namespace JSearchAndReplace
         private void SetDefaults()
         {
             SearchAndReplaceMethod = SearchAndReplaceMethod.LineByLine;
+            OutputFile = "SearchAndReplaceOutput.txt";
+            NoUI = false;
         }
 
         public void Parse()
         {
-            ParseParameters();
-
-            if (string.IsNullOrEmpty(SearchAndReplaceFile) && SearchAndReplaceContent == null)
-            {
-                throw new Exception("Search and replace contents need to be specified, either by a file or selecting a pre-determined set.");
-            }
-
+            ParseCommandLineParameters();
             ParseOutputFile();
         }
 
-        private void ParseParameters()
+        private void ParseCommandLineParameters()
         {
-            foreach (string parameter in CommandLineParameters)
+            if (CommandLineParameters != null)
             {
-                switch (parameter.ToLower())
+                char[] trimStart = new char[] { '-', '/' };
+
+                for (int i = 0; i < CommandLineParameters.Length; i++)
                 {
-                    case "i":
-                    case "input":
-                        InputFile = parameter;
-                        break;
-                    case "o":
-                    case "output":
-                        OutputFile = parameter;
-                        break;
-                    case "f":
-                    case "searchandreplacefile":
-                        SearchAndReplaceFile = parameter;
-                        break;
-                    case "e":
-                    case "existingset":
-                        SearchAndReplaceContent = SearchAndReplaceUtil.GetExistingSetByCommandLineName(parameter);
-                        break;
-                    case "c":
-                    case "custom":
-                        SearchAndReplaceContent = SearchAndReplaceUtil.GetSetFromCSV(parameter);
-                        break;
-                    default:
-                        throw new Exception("Unknown parameter: " + parameter);
+                    string parameter = CommandLineParameters[i].TrimStart(trimStart).ToLower();
+                    switch (parameter)
+                    {
+                        case "i":
+                        case "input":
+                            InputFile = GetNextCommandLineParameter(i++);
+                            break;
+                        case "o":
+                        case "output":
+                            OutputFile = GetNextCommandLineParameter(i++);
+                            break;
+                        case "f":
+                        case "searchandreplacefile":
+                            SearchAndReplaceFile = GetNextCommandLineParameter(i++);
+                            break;
+                        case "e":
+                        case "existingset":
+                            SearchAndReplaceContent = SearchAndReplaceUtil.GetExistingSetByCommandLineName(GetNextCommandLineParameter(i++));
+                            break;
+                        case "c":
+                        case "custom":
+                            SearchAndReplaceContent = SearchAndReplaceUtil.GetSetFromCSV(GetNextCommandLineParameter(i++));
+                            break;
+                        case "noui":
+                            NoUI = true;
+                            break;
+                        default:
+                            throw new Exception("Unknown parameter: " + parameter);
+                    }
                 }
             }
+        }
+
+        private string GetNextCommandLineParameter(int i)
+        {
+            if ((i + 1) > CommandLineParameters.Length)
+                throw new Exception(string.Format("Value for command line \"{0}\" doesn't exist.", CommandLineParameters[i]));
+
+            return CommandLineParameters[i + 1];
         }
 
         /// <summary>
@@ -133,12 +151,15 @@ namespace JSearchAndReplace
 
         private void ParseOutputFile()
         {
-            if (!File.Exists(InputFile))
-                throw new FileNotFoundException("Input file not found");
-
             if (string.IsNullOrEmpty(OutputFile))
             {
                 OutputFileParsed = "";
+                return;
+            }
+
+            if (string.IsNullOrEmpty(InputFile))
+            {
+                OutputFileParsed = OutputFile.Replace('<', '_').Replace('>', '_');
                 return;
             }
 

@@ -48,7 +48,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxFileIn.Location = new System.Drawing.Point(71, 34);
             this.textBoxFileIn.Name = "textBoxFileIn";
-            this.textBoxFileIn.Size = new System.Drawing.Size(326, 20);
+            this.textBoxFileIn.Size = new System.Drawing.Size(256, 20);
             this.textBoxFileIn.TabIndex = 0;
             this.textBoxFileIn.Text = "TestSearchAndReplace.srt";
             this.textBoxFileIn.DragDrop += new System.Windows.Forms.DragEventHandler(this.textBoxFileIn_DragDrop);
@@ -57,7 +57,7 @@
             // buttonFileIn
             // 
             this.buttonFileIn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonFileIn.Location = new System.Drawing.Point(403, 32);
+            this.buttonFileIn.Location = new System.Drawing.Point(333, 32);
             this.buttonFileIn.Name = "buttonFileIn";
             this.buttonFileIn.Size = new System.Drawing.Size(75, 23);
             this.buttonFileIn.TabIndex = 1;
@@ -70,14 +70,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxFileOut.Location = new System.Drawing.Point(71, 61);
             this.textBoxFileOut.Name = "textBoxFileOut";
-            this.textBoxFileOut.Size = new System.Drawing.Size(326, 20);
+            this.textBoxFileOut.Size = new System.Drawing.Size(256, 20);
             this.textBoxFileOut.TabIndex = 2;
             this.textBoxFileOut.Text = "<n>.out<e>";
             // 
             // buttonFileOut
             // 
             this.buttonFileOut.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonFileOut.Location = new System.Drawing.Point(403, 59);
+            this.buttonFileOut.Location = new System.Drawing.Point(333, 59);
             this.buttonFileOut.Name = "buttonFileOut";
             this.buttonFileOut.Size = new System.Drawing.Size(75, 23);
             this.buttonFileOut.TabIndex = 3;
@@ -87,7 +87,7 @@
             // buttonGo
             // 
             this.buttonGo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonGo.Location = new System.Drawing.Point(403, 285);
+            this.buttonGo.Location = new System.Drawing.Point(333, 298);
             this.buttonGo.Name = "buttonGo";
             this.buttonGo.Size = new System.Drawing.Size(75, 23);
             this.buttonGo.TabIndex = 4;
@@ -136,7 +136,7 @@
             // buttonWindowsExplorerIntegration
             // 
             this.buttonWindowsExplorerIntegration.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonWindowsExplorerIntegration.Location = new System.Drawing.Point(12, 285);
+            this.buttonWindowsExplorerIntegration.Location = new System.Drawing.Point(12, 298);
             this.buttonWindowsExplorerIntegration.Name = "buttonWindowsExplorerIntegration";
             this.buttonWindowsExplorerIntegration.Size = new System.Drawing.Size(121, 23);
             this.buttonWindowsExplorerIntegration.TabIndex = 13;
@@ -151,14 +151,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.userControlSearchAndReplaceOptions1.Location = new System.Drawing.Point(12, 163);
             this.userControlSearchAndReplaceOptions1.Name = "userControlSearchAndReplaceOptions1";
-            this.userControlSearchAndReplaceOptions1.Size = new System.Drawing.Size(466, 116);
+            this.userControlSearchAndReplaceOptions1.Size = new System.Drawing.Size(396, 129);
             this.userControlSearchAndReplaceOptions1.TabIndex = 14;
             // 
             // FormJSearchAndReplace
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(490, 320);
+            this.ClientSize = new System.Drawing.Size(420, 333);
             this.Controls.Add(this.userControlSearchAndReplaceOptions1);
             this.Controls.Add(this.buttonWindowsExplorerIntegration);
             this.Controls.Add(this.labelSearchAndReplaceText);

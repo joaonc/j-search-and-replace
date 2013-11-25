@@ -27,9 +27,18 @@ namespace JSearchAndReplace
 
             if (!registryProcessed)
             {
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new FormJSearchAndReplace());
+                SearchAndReplaceParameters searchAndReplaceParameters = new SearchAndReplaceParameters(args);
+
+                if (searchAndReplaceParameters.NoUI)
+                {
+                    SearchAndReplace.SearchAndReplaceInFile(searchAndReplaceParameters);
+                }
+                else
+                {
+                    Application.EnableVisualStyles();
+                    Application.SetCompatibleTextRenderingDefault(false);
+                    Application.Run(new FormJSearchAndReplace(searchAndReplaceParameters));
+                }
             }
         }
     }
