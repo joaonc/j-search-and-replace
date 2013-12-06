@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace JSearchAndReplace
 {
+    /// <summary>
+    /// <para>Search items: all except last</para>
+    /// <para>Replace with: last item</para>
+    /// </summary>
     public static class SearchAndReplaceContent
     {
         // NOTE: Make sure you update SearchAndReplaceUtil.ExistingSets to match the entries here
 
         /// <summary>
-        /// <para>Search items: all except last</para>
-        /// <para>Replace with: last item</para>
+        /// Removes accents
         /// </summary>
         public static string[][] RemoveDiacritics = new string[][]
         {
@@ -23,6 +26,22 @@ namespace JSearchAndReplace
             new string[] {"ù", "ú", "ü", "û", "u"},
             new string[] {"ç", "c"},
             new string[] {"ñ", "n"}
+        };
+
+        /// <summary>
+        /// Removes spaces
+        /// </summary>
+        public static string[][] RemoveSpaces = new string[][]
+        {
+            new string[] {" ", ""}
+        };
+
+        /// <summary>
+        /// Replaces invalid characters in filenames with an underline
+        /// </summary>
+        public static string[][] ReplaceInvalidFilanameCharsWithUnderline = new string[][]
+        {
+            new string[] {"\\", "/", ":", "*", "?", "\"", "<", ">", "|", ""}
         };
     }
 }

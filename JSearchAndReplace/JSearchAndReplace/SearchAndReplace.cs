@@ -11,8 +11,13 @@ namespace JSearchAndReplace
     {
         public static void SearchAndReplaceInFile(SearchAndReplaceParameters searchAndReplaceParameters)
         {
+            if (searchAndReplaceParameters == null)
+                throw new Exception("Search and replace parameters needs to be specified. Currently null.");
+
             if (string.IsNullOrEmpty(searchAndReplaceParameters.SearchAndReplaceFile) && searchAndReplaceParameters.SearchAndReplaceContent == null)
                 throw new Exception("Search and replace contents need to be specified, either by a file or selecting a pre-determined set.");
+
+            searchAndReplaceParameters.OutputFileParsed = ParseOutputFilename(searchAndReplaceParameters);
 
             if (string.IsNullOrEmpty(searchAndReplaceParameters.SearchAndReplaceFile))
                 // Use preset contents to search and replace
@@ -30,6 +35,19 @@ namespace JSearchAndReplace
                     searchAndReplaceParameters.OutputFileParsed,
                     searchAndReplaceParameters.SearchAndReplaceMethod,
                     searchAndReplaceParameters.Encoding);
+        }
+
+        public static string ParseOutputFilename(SearchAndReplaceParameters searchAndReplaceParameters)
+        {
+            return ParseOutputFilename(searchAndReplaceParameters.InputFile, searchAndReplaceParameters.OutputFile);
+        }
+
+        public static string ParseOutputFilename(string inputFile, string unparsedOutputFile)
+        {
+            string fileExt = Path.GetExtension(inputFile);
+            string fineNameNoExt = Path.GetFileNameWithoutExtension(inputFile);
+
+            return unparsedOutputFile.Replace("<n>", fineNameNoExt).Replace("<e>", fileExt);
         }
 
         public static void SearchAndReplaceInFile(string fileSearchAndReplace, string fileIn, string fileOut = null, SearchAndReplaceMethod method = SearchAndReplaceMethod.WholeFileInMemory, Encoding encoding = null)
@@ -81,10 +99,10 @@ namespace JSearchAndReplace
         /// <param name="encoding"></param>
         private static void SearchAndReplaceInFile_WholeFileInMemory(string[][] searchAndReplace, string fileIn, string fileOut = null, Encoding encoding = null)
         {
-            bool replace = false;
+            bool replaceFile = false;
             if (string.IsNullOrEmpty(fileOut) || string.Compare(fileIn, fileOut, true) == 0)
             {
-                replace = true;
+                replaceFile = true;
                 fileOut = fileIn + ".tmp";
             }
 
@@ -99,7 +117,7 @@ namespace JSearchAndReplace
                     contents = contents.Replace(searchAndReplaceItems[i], replaceWith);
             }
 
-            if (replace)
+            if (replaceFile)
                 File.Replace(fileOut, fileIn, null);
         }
 
@@ -113,10 +131,10 @@ namespace JSearchAndReplace
         /// <param name="encoding"></param>
         private static void SearchAndReplaceInFile_LineByLine(string[][] searchAndReplace, string fileIn, string fileOut = null, Encoding encoding = null)
         {
-            bool replace = false;
+            bool replaceFile = false;
             if (string.IsNullOrEmpty(fileOut) || string.Compare(fileIn, fileOut, true) == 0)
             {
-                replace = true;
+                replaceFile = true;
                 fileOut = fileIn + ".tmp";
             }
 
@@ -149,7 +167,7 @@ namespace JSearchAndReplace
                 srOut.Close();
             }
 
-            if (replace)
+            if (replaceFile)
                 File.Replace(fileOut, fileIn, null);
         }
     }

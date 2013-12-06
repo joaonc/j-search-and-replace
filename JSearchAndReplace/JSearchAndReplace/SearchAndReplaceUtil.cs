@@ -11,25 +11,58 @@ namespace JSearchAndReplace
     {
         /// <summary>
         /// Existing sets of search and replace.
-        /// 2D array whith the content
+        /// 2D jagged array whith the content
         /// {Command line name , Readable name , description}
         /// </summary>
-        public static readonly string[,] ExistingSets = new string[,] { { "RemoveDiacritics", "Remove Diacritics", "Removes accents from a string" } };
+        public static readonly string[][] ExistingSets = new string[][]
+        {
+            new string[] { "RemoveDiacritics", "Remove Diacritics", "Removes all accents" },
+            new string[] { "RemoveSpaces", "Remove Spaces", "Removes all spaces" },
+            new string[] { "ReplaceInvalidFilanameCharsWithUnderline", "Replace Invalid Filaname Chars With Underline", "Replaces invalid filaname characters with an underline" }
+        };
 
         /// <summary>
         /// Gets an existing search and replace set
         /// </summary>
-        /// <param name="setName">The commandline name of the set.</param>
+        /// <param name="commandLineName">The commandline name of the set.</param>
         /// <returns></returns>
-        public static string[][] GetExistingSetByCommandLineName(string setName)
+        public static string[][] GetExistingSetByCommandLineName(string commandLineName)
         {
-            switch (setName.ToLower())
+            switch (commandLineName.ToLower())
             {
                 case "removediacritics":
                     return SearchAndReplaceContent.RemoveDiacritics;
+                case "removespaces":
+                    return SearchAndReplaceContent.RemoveSpaces;
+                case "replaceinvalidfilanamecharswithunderline":
+                    return SearchAndReplaceContent.ReplaceInvalidFilanameCharsWithUnderline;
                 default:
-                    throw new Exception("Unknown set: " + setName);
+                    throw new Exception("Unknown set: " + commandLineName);
             }
+        }
+
+        public static int GetExistingSetInfoIndexByCommandLineName(string commandLineName)
+        {
+            return GetExistingSetInfoIndexBySelectedIndexAndValue(0, commandLineName);
+        }
+
+        public static int GetExistingSetInfoIndexByReadableName(string readableName)
+        {
+            return GetExistingSetInfoIndexBySelectedIndexAndValue(1, readableName);
+        }
+
+        private static int GetExistingSetInfoIndexBySelectedIndexAndValue(int searchIndex, string value)
+        {
+            return GetExistingSetInfoIndexBySelectedIndexAndValue(searchIndex, value, StringComparison.CurrentCultureIgnoreCase);
+        }
+
+        private static int GetExistingSetInfoIndexBySelectedIndexAndValue(int searchIndex, string value, StringComparison comparisonType)
+        {
+            for (int i = 0; i < ExistingSets[0].Length; i++)
+                if (ExistingSets[i][searchIndex].Equals(value, comparisonType))
+                    return i;
+
+            return -1;
         }
 
         /// <summary>
@@ -37,13 +70,13 @@ namespace JSearchAndReplace
         /// </summary>
         /// <param name="setReadableName">The readable name of the set.</param>
         /// <returns></returns>
-        public static string[][] GetExistingSetByReadableName(string setReadableName)
+        public static string[][] GetExistingSetByReadableName(string readableName)
         {
-            for (int i = 0; i < ExistingSets.GetLength(0); i++)
-                if (ExistingSets[i, 1].ToLower().Equals(setReadableName))
-                    return GetExistingSetByCommandLineName(ExistingSets[i, 0]);
+            int i = GetExistingSetInfoIndexByReadableName(readableName);
+            if (i < 0)
+                throw new Exception("Unknown set: " + readableName);
 
-            throw new Exception("Unknown set: " + setReadableName);
+            return GetExistingSetByCommandLineName(ExistingSets[i][0]);
         }
 
 

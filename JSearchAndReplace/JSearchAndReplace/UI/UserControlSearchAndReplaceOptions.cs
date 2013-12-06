@@ -12,20 +12,52 @@ namespace JSearchAndReplace
 {
     public partial class UserControlSearchAndReplaceOptions : UserControl
     {
+        private ToolTip toolTipComboBoxSearchAndReplaceSet = new ToolTip();
+
         public UserControlSearchAndReplaceOptions()
         {
             InitializeComponent();
+            SetDefaults();
+            SetSearchAndReplaceParameters(new SearchAndReplaceParameters());
+        }
+
+        public UserControlSearchAndReplaceOptions(SearchAndReplaceParameters searchAndReplaceParameters)
+        {
+            InitializeComponent();
+            SetDefaults();
+            SetSearchAndReplaceParameters(searchAndReplaceParameters);
         }
 
         private void UserControlSearchAndReplaceOptions_Load(object sender, EventArgs e)
         {
+            UpdateUI();
+        }
+
+        private void SetDefaults()
+        {
+            toolTipComboBoxSearchAndReplaceSet.AutoPopDelay = 0;
+            toolTipComboBoxSearchAndReplaceSet.InitialDelay = 0;
+            toolTipComboBoxSearchAndReplaceSet.ReshowDelay = 0;
+            toolTipComboBoxSearchAndReplaceSet.ShowAlways = true;
+
+            comboBoxSearchAndReplaceSet.Items.Clear();
             for (int i = 0; i < SearchAndReplaceUtil.ExistingSets.GetLength(0); i++)
             {
-                comboBoxSearchAndReplaceSet.Items.Add(SearchAndReplaceUtil.ExistingSets[i, 1]);
+                comboBoxSearchAndReplaceSet.Items.Add(SearchAndReplaceUtil.ExistingSets[i][1]);
             }
             comboBoxSearchAndReplaceSet.SelectedIndex = 0;
 
-            UpdateUI();
+            radioButtonCustom.Checked = true;
+        }
+
+        public void SetSearchAndReplaceParameters(SearchAndReplaceParameters searchAndReplaceParameters)
+        {
+            radioButtonExistingSet.Checked = (searchAndReplaceParameters.SearchAndReplaceDataSource == SearchAndReplaceDataSource.ExistingSet);
+            radioButtonFromFile.Checked = (searchAndReplaceParameters.SearchAndReplaceDataSource == SearchAndReplaceDataSource.FromFile);
+            radioButtonCustom.Checked = (searchAndReplaceParameters.SearchAndReplaceDataSource == SearchAndReplaceDataSource.Custom);
+
+            if (searchAndReplaceParameters.SearchAndReplaceDataSource == SearchAndReplaceDataSource.ExistingSet)
+                comboBoxSearchAndReplaceSet.SelectedText = searchAndReplaceParameters.SearchAndReplaceExistingSetInfo[1];
         }
 
         private void UpdateUI()
@@ -97,6 +129,17 @@ namespace JSearchAndReplace
         {
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
             textBoxFileName.Text = files[0];
+        }
+
+        private void comboBoxSearchAndReplaceSet_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Set tooltip with description of the existing set
+            try
+            {
+                string toolTipText = SearchAndReplaceUtil.ExistingSets[SearchAndReplaceUtil.GetExistingSetInfoIndexByReadableName(comboBoxSearchAndReplaceSet.Text)][2];
+                toolTipComboBoxSearchAndReplaceSet.SetToolTip(comboBoxSearchAndReplaceSet, toolTipText);
+            }
+            catch { }
         }
     }
 }

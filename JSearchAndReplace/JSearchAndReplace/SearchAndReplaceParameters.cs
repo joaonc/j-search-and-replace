@@ -35,11 +35,19 @@ namespace JSearchAndReplace
         /// </summary>
         public string SearchAndReplaceFile { get; set; }
 
+        public SearchAndReplaceDataSource SearchAndReplaceDataSource { get; set; }
+
         /// <summary>
         /// Content used to search and replace, as defined in the SearchAndReplaceContent class.
         /// If not specified, then SearchAndReplaceFile needs to be specified.
         /// </summary>
         public string[][] SearchAndReplaceContent { get; set; }
+
+        /// <summary>
+        /// If the option is to search and replace using an existing set, then this contains that set's info: command line name, readable name and description.
+        /// See SearchAndReplaceUtil.ExistingSets for more details.
+        /// </summary>
+        public string[] SearchAndReplaceExistingSetInfo { get; set; }
 
         /// <summary>
         /// Run the app without UI, useful for command line batch processing.
@@ -70,6 +78,12 @@ namespace JSearchAndReplace
             SearchAndReplaceMethod = SearchAndReplaceMethod.LineByLine;
             OutputFile = "SearchAndReplaceOutput.txt";
             NoUI = false;
+
+            // Remove Diacritics existing set
+            SearchAndReplaceDataSource = SearchAndReplaceDataSource.ExistingSet;
+            string existingSetCommandLineName = "RemoveDiacritics";
+            SearchAndReplaceExistingSetInfo = SearchAndReplaceUtil.ExistingSets[SearchAndReplaceUtil.GetExistingSetInfoIndexByCommandLineName(existingSetCommandLineName)];
+            SearchAndReplaceContent = SearchAndReplaceUtil.GetExistingSetByCommandLineName(existingSetCommandLineName);
         }
 
         public void Parse()
@@ -78,11 +92,46 @@ namespace JSearchAndReplace
             ParseOutputFile();
         }
 
+        /// <summary>
+        /// Returns a string that can be passed later as command line parameters to be used to create a new object.
+        /// </summary>
+        /// <returns></returns>
+        public string SerializeToCommandLineParameters(
+            bool verbose=false, bool excludeInputFile=false, bool excludeOutputFile=false)
+        {
+            StringBuilder args = new StringBuilder();
+
+            if (!excludeInputFile && !string.IsNullOrEmpty(InputFile))
+                args.AppendFormat("-{0} \"{1}\" ",verbose ? "input" : "i", InputFile);
+            if (!excludeOutputFile && !string.IsNullOrEmpty(OutputFile))
+                args.AppendFormat("-{0} \"{1}\" ", verbose ? "output" : "o", OutputFile);
+
+            switch (SearchAndReplaceDataSource)
+            {
+                case SearchAndReplaceDataSource.ExistingSet:
+                    args.AppendFormat("-{0} {1} ", verbose ? "existingset" : "e", SearchAndReplaceExistingSetInfo[0]);
+                    break;
+                case SearchAndReplaceDataSource.FromFile:
+                    args.AppendFormat("-{0} \"{1}\" ", verbose ? "searchandreplacefile" : "f", SearchAndReplaceFile);
+                    break;
+                case SearchAndReplaceDataSource.Custom:
+                    throw new Exception("TODO: serialize custom set to command line string.");
+                default:
+                    throw new Exception("Need to implement handling of SearchAndReplaceDataSource." + SearchAndReplaceDataSource.ToString());
+            }
+
+            if (NoUI)
+                args.Append("-noui ");
+
+            return args.ToString().Trim();
+        }
+
         private void ParseCommandLineParameters()
         {
             if (CommandLineParameters != null)
             {
-                char[] trimStart = new char[] { '-', '/' };
+                char[] trimStart = new char[] { '-', '/', ' ' };
+                char[] trimQuotes = new char[] { '"', ' ' };
 
                 for (int i = 0; i < CommandLineParameters.Length; i++)
                 {
@@ -91,23 +140,31 @@ namespace JSearchAndReplace
                     {
                         case "i":
                         case "input":
-                            InputFile = GetNextCommandLineParameter(i++);
+                            InputFile = GetNextCommandLineParameter(i++).Trim(trimQuotes);
                             break;
                         case "o":
                         case "output":
-                            OutputFile = GetNextCommandLineParameter(i++);
+                            OutputFile = GetNextCommandLineParameter(i++).Trim(trimQuotes);
                             break;
                         case "f":
                         case "searchandreplacefile":
                             SearchAndReplaceFile = GetNextCommandLineParameter(i++);
+                            SearchAndReplaceDataSource = SearchAndReplaceDataSource.FromFile;
                             break;
                         case "e":
                         case "existingset":
-                            SearchAndReplaceContent = SearchAndReplaceUtil.GetExistingSetByCommandLineName(GetNextCommandLineParameter(i++));
+                            string existingSetCommandLineName = GetNextCommandLineParameter(i++);
+                            int existingSetInfoIndex = SearchAndReplaceUtil.GetExistingSetInfoIndexByCommandLineName(existingSetCommandLineName);
+                            if (existingSetInfoIndex < 0)
+                                throw new Exception("Unknown set: " + existingSetCommandLineName);
+                            SearchAndReplaceExistingSetInfo = SearchAndReplaceUtil.ExistingSets[existingSetInfoIndex];
+                            SearchAndReplaceContent = SearchAndReplaceUtil.GetExistingSetByCommandLineName(existingSetCommandLineName);
+                            SearchAndReplaceDataSource = SearchAndReplaceDataSource.ExistingSet;
                             break;
                         case "c":
                         case "custom":
                             SearchAndReplaceContent = SearchAndReplaceUtil.GetSetFromCSV(GetNextCommandLineParameter(i++));
+                            SearchAndReplaceDataSource = SearchAndReplaceDataSource.Custom;
                             break;
                         case "noui":
                             NoUI = true;

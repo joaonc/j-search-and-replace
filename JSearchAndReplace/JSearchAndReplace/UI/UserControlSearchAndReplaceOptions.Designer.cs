@@ -74,12 +74,15 @@
             // 
             // comboBoxSearchAndReplaceSet
             // 
+            this.comboBoxSearchAndReplaceSet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxSearchAndReplaceSet.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSearchAndReplaceSet.FormattingEnabled = true;
             this.comboBoxSearchAndReplaceSet.Location = new System.Drawing.Point(96, 4);
             this.comboBoxSearchAndReplaceSet.Name = "comboBoxSearchAndReplaceSet";
             this.comboBoxSearchAndReplaceSet.Size = new System.Drawing.Size(201, 21);
             this.comboBoxSearchAndReplaceSet.TabIndex = 3;
+            this.comboBoxSearchAndReplaceSet.SelectedIndexChanged += new System.EventHandler(this.comboBoxSearchAndReplaceSet_SelectedIndexChanged);
             // 
             // textBoxFileName
             // 

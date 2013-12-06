@@ -36,14 +36,24 @@
             this.groupBoxFiles = new System.Windows.Forms.GroupBox();
             this.buttonOk = new System.Windows.Forms.Button();
             this.groupBoxSearchAndReplace = new System.Windows.Forms.GroupBox();
+            this.userControlSearchAndReplaceOptions = new JSearchAndReplace.UserControlSearchAndReplaceOptions();
+            this.labelText = new System.Windows.Forms.Label();
+            this.textBoxRightClick = new System.Windows.Forms.TextBox();
+            this.groupBoxRightClickEntry = new System.Windows.Forms.GroupBox();
+            this.checkBoxMakeDefault = new System.Windows.Forms.CheckBox();
+            this.radioButtonAddToExisting = new System.Windows.Forms.RadioButton();
+            this.radioButtonReplaceExisting = new System.Windows.Forms.RadioButton();
+            this.checkBoxNoUI = new System.Windows.Forms.CheckBox();
             this.groupBoxFiles.SuspendLayout();
+            this.groupBoxSearchAndReplace.SuspendLayout();
+            this.groupBoxRightClickEntry.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonClose
             // 
             this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonClose.Location = new System.Drawing.Point(422, 398);
+            this.buttonClose.Location = new System.Drawing.Point(340, 451);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(75, 23);
             this.buttonClose.TabIndex = 0;
@@ -104,9 +114,9 @@
             this.groupBoxFiles.Controls.Add(this.textBoxFileExtensions);
             this.groupBoxFiles.Controls.Add(this.radioButtonFileExtensions);
             this.groupBoxFiles.Controls.Add(this.radioButtonAllFiles);
-            this.groupBoxFiles.Location = new System.Drawing.Point(12, 35);
+            this.groupBoxFiles.Location = new System.Drawing.Point(12, 148);
             this.groupBoxFiles.Name = "groupBoxFiles";
-            this.groupBoxFiles.Size = new System.Drawing.Size(485, 103);
+            this.groupBoxFiles.Size = new System.Drawing.Size(403, 103);
             this.groupBoxFiles.TabIndex = 6;
             this.groupBoxFiles.TabStop = false;
             this.groupBoxFiles.Text = "File Extensions";
@@ -114,7 +124,7 @@
             // buttonOk
             // 
             this.buttonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOk.Location = new System.Drawing.Point(341, 398);
+            this.buttonOk.Location = new System.Drawing.Point(259, 451);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 23);
             this.buttonOk.TabIndex = 7;
@@ -124,14 +134,104 @@
             // 
             // groupBoxSearchAndReplace
             // 
-            this.groupBoxSearchAndReplace.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.groupBoxSearchAndReplace.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBoxSearchAndReplace.Location = new System.Drawing.Point(13, 145);
+            this.groupBoxSearchAndReplace.Controls.Add(this.userControlSearchAndReplaceOptions);
+            this.groupBoxSearchAndReplace.Location = new System.Drawing.Point(13, 257);
             this.groupBoxSearchAndReplace.Name = "groupBoxSearchAndReplace";
-            this.groupBoxSearchAndReplace.Size = new System.Drawing.Size(484, 100);
+            this.groupBoxSearchAndReplace.Size = new System.Drawing.Size(402, 184);
             this.groupBoxSearchAndReplace.TabIndex = 8;
             this.groupBoxSearchAndReplace.TabStop = false;
             this.groupBoxSearchAndReplace.Text = "Search and Replace";
+            // 
+            // userControlSearchAndReplaceOptions
+            // 
+            this.userControlSearchAndReplaceOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.userControlSearchAndReplaceOptions.Location = new System.Drawing.Point(12, 19);
+            this.userControlSearchAndReplaceOptions.Name = "userControlSearchAndReplaceOptions";
+            this.userControlSearchAndReplaceOptions.Size = new System.Drawing.Size(384, 159);
+            this.userControlSearchAndReplaceOptions.TabIndex = 0;
+            // 
+            // labelText
+            // 
+            this.labelText.AutoSize = true;
+            this.labelText.Location = new System.Drawing.Point(6, 24);
+            this.labelText.Name = "labelText";
+            this.labelText.Size = new System.Drawing.Size(28, 13);
+            this.labelText.TabIndex = 9;
+            this.labelText.Text = "Text";
+            // 
+            // textBoxRightClick
+            // 
+            this.textBoxRightClick.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxRightClick.Location = new System.Drawing.Point(42, 21);
+            this.textBoxRightClick.Name = "textBoxRightClick";
+            this.textBoxRightClick.Size = new System.Drawing.Size(353, 20);
+            this.textBoxRightClick.TabIndex = 10;
+            // 
+            // groupBoxRightClickEntry
+            // 
+            this.groupBoxRightClickEntry.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxRightClickEntry.Controls.Add(this.checkBoxMakeDefault);
+            this.groupBoxRightClickEntry.Controls.Add(this.radioButtonAddToExisting);
+            this.groupBoxRightClickEntry.Controls.Add(this.radioButtonReplaceExisting);
+            this.groupBoxRightClickEntry.Controls.Add(this.textBoxRightClick);
+            this.groupBoxRightClickEntry.Controls.Add(this.labelText);
+            this.groupBoxRightClickEntry.Location = new System.Drawing.Point(13, 35);
+            this.groupBoxRightClickEntry.Name = "groupBoxRightClickEntry";
+            this.groupBoxRightClickEntry.Size = new System.Drawing.Size(401, 107);
+            this.groupBoxRightClickEntry.TabIndex = 11;
+            this.groupBoxRightClickEntry.TabStop = false;
+            this.groupBoxRightClickEntry.Text = "Right Click Entry";
+            // 
+            // checkBoxMakeDefault
+            // 
+            this.checkBoxMakeDefault.AutoSize = true;
+            this.checkBoxMakeDefault.Location = new System.Drawing.Point(127, 71);
+            this.checkBoxMakeDefault.Name = "checkBoxMakeDefault";
+            this.checkBoxMakeDefault.Size = new System.Drawing.Size(90, 17);
+            this.checkBoxMakeDefault.TabIndex = 13;
+            this.checkBoxMakeDefault.Text = "Make Default";
+            this.checkBoxMakeDefault.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonAddToExisting
+            // 
+            this.radioButtonAddToExisting.AutoSize = true;
+            this.radioButtonAddToExisting.Location = new System.Drawing.Point(12, 71);
+            this.radioButtonAddToExisting.Name = "radioButtonAddToExisting";
+            this.radioButtonAddToExisting.Size = new System.Drawing.Size(95, 17);
+            this.radioButtonAddToExisting.TabIndex = 12;
+            this.radioButtonAddToExisting.Text = "Add to Existing";
+            this.radioButtonAddToExisting.UseVisualStyleBackColor = true;
+            this.radioButtonAddToExisting.CheckedChanged += new System.EventHandler(this.radioButtonAddToExisting_CheckedChanged);
+            // 
+            // radioButtonReplaceExisting
+            // 
+            this.radioButtonReplaceExisting.AutoSize = true;
+            this.radioButtonReplaceExisting.Checked = true;
+            this.radioButtonReplaceExisting.Location = new System.Drawing.Point(12, 47);
+            this.radioButtonReplaceExisting.Name = "radioButtonReplaceExisting";
+            this.radioButtonReplaceExisting.Size = new System.Drawing.Size(101, 17);
+            this.radioButtonReplaceExisting.TabIndex = 11;
+            this.radioButtonReplaceExisting.TabStop = true;
+            this.radioButtonReplaceExisting.Text = "ReplaceExisting";
+            this.radioButtonReplaceExisting.UseVisualStyleBackColor = true;
+            this.radioButtonReplaceExisting.CheckedChanged += new System.EventHandler(this.radioButtonRightClickReplaceExisting_CheckedChanged);
+            // 
+            // checkBoxNoUI
+            // 
+            this.checkBoxNoUI.AutoSize = true;
+            this.checkBoxNoUI.Location = new System.Drawing.Point(187, 12);
+            this.checkBoxNoUI.Name = "checkBoxNoUI";
+            this.checkBoxNoUI.Size = new System.Drawing.Size(119, 17);
+            this.checkBoxNoUI.TabIndex = 12;
+            this.checkBoxNoUI.Text = "Execute Without UI";
+            this.checkBoxNoUI.UseVisualStyleBackColor = true;
             // 
             // FormWindowsExplorerIntegration
             // 
@@ -139,15 +239,18 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonClose;
-            this.ClientSize = new System.Drawing.Size(509, 433);
+            this.ClientSize = new System.Drawing.Size(427, 486);
+            this.Controls.Add(this.checkBoxNoUI);
             this.Controls.Add(this.groupBoxSearchAndReplace);
             this.Controls.Add(this.buttonOk);
             this.Controls.Add(this.checkBoxEnableRightClick);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.groupBoxFiles);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Controls.Add(this.groupBoxRightClickEntry);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(442, 410);
             this.Name = "FormWindowsExplorerIntegration";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -155,6 +258,9 @@
             this.Load += new System.EventHandler(this.FormWindowsExplorerIntegration_Load);
             this.groupBoxFiles.ResumeLayout(false);
             this.groupBoxFiles.PerformLayout();
+            this.groupBoxSearchAndReplace.ResumeLayout(false);
+            this.groupBoxRightClickEntry.ResumeLayout(false);
+            this.groupBoxRightClickEntry.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -170,5 +276,13 @@
         private System.Windows.Forms.GroupBox groupBoxFiles;
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.GroupBox groupBoxSearchAndReplace;
+        private UserControlSearchAndReplaceOptions userControlSearchAndReplaceOptions;
+        private System.Windows.Forms.Label labelText;
+        private System.Windows.Forms.TextBox textBoxRightClick;
+        private System.Windows.Forms.GroupBox groupBoxRightClickEntry;
+        private System.Windows.Forms.CheckBox checkBoxMakeDefault;
+        private System.Windows.Forms.RadioButton radioButtonAddToExisting;
+        private System.Windows.Forms.RadioButton radioButtonReplaceExisting;
+        private System.Windows.Forms.CheckBox checkBoxNoUI;
     }
 }
