@@ -12,18 +12,16 @@ namespace JSearchAndReplace
 {
     public partial class FormJSearchAndReplace : Form
     {
-        private SearchAndReplaceParameters searchAndReplaceParameters;
-
         public FormJSearchAndReplace()
         {
             InitializeComponent();
-            searchAndReplaceParameters = new SearchAndReplaceParameters();
+            SetSearchAndReplaceParameters(new SearchAndReplaceParameters());
         }
 
         public FormJSearchAndReplace(SearchAndReplaceParameters searchAndReplaceParameters)
         {
             InitializeComponent();
-            this.searchAndReplaceParameters = searchAndReplaceParameters;
+            SetSearchAndReplaceParameters(searchAndReplaceParameters);
         }
 
         private void FormJSearchAndReplace_Load(object sender, EventArgs e)
@@ -35,14 +33,10 @@ namespace JSearchAndReplace
         /// </summary>
         /// <param name="searchAndReplaceParameters">The new SearchAndReplaceParameters object.</param>
         /// <returns></returns>
-        public SearchAndReplaceParameters SetSearchAndReplaceParameters(SearchAndReplaceParameters searchAndReplaceParameters)
+        public void SetSearchAndReplaceParameters(SearchAndReplaceParameters searchAndReplaceParameters)
         {
-            this.searchAndReplaceParameters = searchAndReplaceParameters;
-
             textBoxFileIn.Text = searchAndReplaceParameters.InputFile;
             textBoxFileOut.Text = searchAndReplaceParameters.OutputFile;
-
-            return this.searchAndReplaceParameters;
         }
 
         /// <summary>
@@ -51,6 +45,8 @@ namespace JSearchAndReplace
         /// <returns></returns>
         public SearchAndReplaceParameters GetSearchAndReplaceParameters()
         {
+            SearchAndReplaceParameters searchAndReplaceParameters = new SearchAndReplaceParameters();
+
             searchAndReplaceParameters.InputFile = textBoxFileIn.Text.Trim();
             searchAndReplaceParameters.OutputFile = textBoxFileOut.Text.Trim();
 
@@ -71,14 +67,24 @@ namespace JSearchAndReplace
 
         private void buttonGo_Click(object sender, EventArgs e)
         {
-            searchAndReplaceParameters = GetSearchAndReplaceParameters();  // Update params from UI
+            SearchAndReplaceParameters searchAndReplaceParameters = GetSearchAndReplaceParameters();
             SearchAndReplace.SearchAndReplaceInFile(searchAndReplaceParameters);
         }
 
         private void buttonWindowsExplorerIntegration_Click(object sender, EventArgs e)
         {
-            FormWindowsExplorerIntegration form = new FormWindowsExplorerIntegration();
+            FormWindowsExplorerIntegration form = new FormWindowsExplorerIntegration(GetSearchAndReplaceParameters());
             form.ShowDialog();
+        }
+
+        private void textBoxFileIn_Enter(object sender, EventArgs e)
+        {
+            textBoxFileIn.SelectAll();
+        }
+
+        private void textBoxFileOut_Enter(object sender, EventArgs e)
+        {
+            textBoxFileOut.SelectAll();
         }
     }
 }

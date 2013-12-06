@@ -13,6 +13,13 @@ namespace JSearchAndReplace
         public FormWindowsExplorerIntegration()
         {
             InitializeComponent();
+            SetSearchAndReplaceParameters(new SearchAndReplaceParameters());
+        }
+
+        public FormWindowsExplorerIntegration(SearchAndReplaceParameters searchAndReplaceParameters)
+        {
+            InitializeComponent();
+            SetSearchAndReplaceParameters(searchAndReplaceParameters);
         }
 
         private void FormWindowsExplorerIntegration_Load(object sender, EventArgs e)
@@ -33,6 +40,30 @@ namespace JSearchAndReplace
         {
             if (checkBoxEnableRightClick.Checked)
             {
+                StringBuilder args = new StringBuilder();
+
+                //
+                // Options to be passed to the SearchAndReplace application when running elevated to register
+                //
+
+                args.Append(SetRegistry.SetRegistryCommandLineArg).Append(" ");
+
+                // Right click options
+                if(!string.IsNullOrEmpty(textBoxRightClick.Text.Trim()))
+                    args.AppendFormat("-rightclicktext {0} ", textBoxRightClick.Text.Trim());
+
+                if (radioButtonReplaceExisting.Checked)
+                    args.Append("-replaceexisting ");
+                else if (radioButtonAddToExisting.Checked)
+                {
+                    args.Append("-addtoexisting ");
+                    if (checkBoxMakeDefault.Checked)
+                        args.Append("-makedefault ");
+                }
+                else
+                    throw new Exception("Need to implement registry option related to right click options.");
+
+                // File extensions
                 if (radioButtonAllFiles.Checked)
                 {
                     throw new Exception("TODO: implement handling all files in the registry.");
@@ -40,18 +71,33 @@ namespace JSearchAndReplace
                 else if (radioButtonFileExtensions.Checked)
                 {
                     string[] fileExtensions = textBoxFileExtensions.Text.Split(new char[] {'\n'}, StringSplitOptions.RemoveEmptyEntries);
-                    string args = string.Format("{0} \"{1}\"", SetRegistry.SetRegistryCommandLineArg, string.Join(" ", fileExtensions));
-                    SetRegistry.StartProcessElevatedPrivileges(args, true);
+                    args.AppendFormat("-extensions \"{1}\" ", string.Join(" ", fileExtensions));
                 }
                 else
-                    throw new Exception("Need to implement registry option.");
+                    throw new Exception("Need to implement registry option related to file extensions.");
+
+                //
+                // Options to be passed to the SearchAndReplace application when running from right click
+                //
+
+                //SearchAndReplaceParameters searchAndReplaceParameters = userControlSearchAndReplaceOptions.get
+
+                SetRegistry.StartProcessElevatedPrivileges(args.ToString().Trim(), true);
             }
 
             Close();
         }
 
+        public void SetSearchAndReplaceParameters(SearchAndReplaceParameters searchAndReplaceParameters)
+        {
+            checkBoxNoUI.Checked = searchAndReplaceParameters.NoUI;
+            userControlSearchAndReplaceOptions.SetSearchAndReplaceParameters(searchAndReplaceParameters);
+        }
+
         private void UpdateUI()
         {
+            checkBoxMakeDefault.Enabled = radioButtonAddToExisting.Checked;
+
             groupBoxFiles.Enabled = checkBoxEnableRightClick.Checked;
             groupBoxSearchAndReplace.Enabled = checkBoxEnableRightClick.Checked;
 
@@ -69,6 +115,16 @@ namespace JSearchAndReplace
         }
 
         private void radioButtonFileExtensions_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateUI();
+        }
+
+        private void radioButtonRightClickReplaceExisting_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateUI();
+        }
+
+        private void radioButtonAddToExisting_CheckedChanged(object sender, EventArgs e)
         {
             UpdateUI();
         }
